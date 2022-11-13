@@ -6,6 +6,7 @@
 ```git clone https://github.com/arrrrtur/Task.git```
 
 Создайте и запустите докер контейнер коммандой ```docker-compose up --build balance```
+Запустите файл `data.sql```, который создаст все необходимые таблицы.
 
 
 ## Структура бд
