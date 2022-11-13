@@ -1,0 +1,9 @@
+POST http://localhost:8080/balance/top-up-balance
+Content-Type: application/json
+
+{
+  "id":"1",
+  "amount": "1000"
+}
+
+###

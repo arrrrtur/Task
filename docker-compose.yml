@@ -1,17 +1,22 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  app:
+  balance:
     build: ./
-    command: ./app
+#    command: ["./wait-for-postgres.sh postgres", "./balance"]
+    container_name: balance
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
-      - db
+      - postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
 
-
-  db:
+  postgres:
     restart: always
+    container_name: postgres
     image: postgres:latest
-    volumes:
-      - ./.data
+    ports:
+      - "5432:5432"
+    environment:
+     - POSTGRES_PASSWORD=postgres

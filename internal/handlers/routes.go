@@ -49,4 +49,6 @@ func (app *application) Register(router *httprouter.Router) {
 	router.HandlerFunc(http.MethodGet, "/report/get-link-report", apperror.Middleware(app.GetReportLink))
 	router.HandlerFunc(http.MethodGet, "/file/:filename", apperror.Middleware(app.GetReportFile))
 
+	//swagger
+	//router.HandlerFunc(http.MethodGet, "/swagger/doc.json")
 }

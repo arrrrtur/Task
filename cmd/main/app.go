@@ -1,7 +1,6 @@
 package main
 
 import (
-	_ ""
 	"Task/internal/config"
 	"Task/internal/handlers"
 	"Task/internal/services"
@@ -31,6 +30,7 @@ func main() {
 	cfg := config.GetConfig()
 
 	postgresSQLClient, err := postgresql.NewClient(context.TODO(), 3, cfg.Storage)
+	logger.Info(cfg)
 	if err != nil {
 		logger.Fatalf("%v", err)
 	}
