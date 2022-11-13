@@ -24,7 +24,13 @@ func backUpBalance(app *application, r *http.Request, blc *models.Balance, amoun
 	return nil
 }
 
-// ReserveFromBalance Перечислить деньги в резерв
+// @Summary Reserve money to pay service
+// @Tags balance
+// @Description Reserve money from balance to reserved balance until transaction is finished
+// @Accept json
+// @Produce json
+// @Param input body models.UnmarshallServicePay true "pay info"
+// @Router /balance/reserve-from-balance [PATCH]
 func (app *application) ReserveFromBalance(w http.ResponseWriter, r *http.Request) error {
 	jsn, err := internal.ParsJSON(r)
 	if err != nil {
@@ -122,7 +128,13 @@ func (app *application) ReserveFromBalance(w http.ResponseWriter, r *http.Reques
 	return nil
 }
 
-// WriteOffMoney Списать деньги с резерва
+// @Summary Confirm the payment
+// @Tags balance
+// @Description
+// @Accept json
+// @Produce json
+// @Param input body models.UnmarshallServicePay true "pay info"
+// @Router /balance/has-passed [PATCH]
 func (app *application) WriteOffMoney(w http.ResponseWriter, r *http.Request) error {
 	jsn, err := internal.ParsJSON(r)
 	if err != nil {
@@ -206,7 +218,13 @@ func (app *application) WriteOffMoney(w http.ResponseWriter, r *http.Request) er
 	return nil
 }
 
-// CancelOrder Если заказ отменен, возвращает деньги на основной баланс
+// @Summary Cancel order
+// @Tags balance
+// @Description If order was canceled return money from reserved balance to user's balance
+// @Accept json
+// @Produce json
+// @Param input body models.UnmarshallCancel true "cancel pay info"
+// @Router /balance/cancel-order [PATCH]
 func (app *application) CancelOrder(w http.ResponseWriter, r *http.Request) error {
 	jsn, err := internal.ParsJSON(r)
 	if err != nil {

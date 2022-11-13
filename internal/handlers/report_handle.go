@@ -11,6 +11,13 @@ import (
 	"strings"
 )
 
+// @Summary Get report link
+// @Tags balance
+// @Description Create report file and get a link to a report in which statistics on services for profit
+// @Accept json
+// @Produce json
+// @Param input body models.UnmarshalGetReport true "date info"
+// @Router /report/get-link-report [GET]
 func (app *application) GetReportLink(w http.ResponseWriter, r *http.Request) error {
 	jsn, err := internal.ParsJSON(r)
 	if err != nil {
@@ -60,6 +67,13 @@ func (app *application) GetReportLink(w http.ResponseWriter, r *http.Request) er
 	return nil
 }
 
+// @Summary Get report file
+// @Tags balance
+// @Description get report file with statistic
+// @Accept json
+// @Produce json
+// @Param filename path string true "filename"
+// @Router /file/{filename} [GET]
 func (app *application) GetReportFile(w http.ResponseWriter, r *http.Request) error {
 	// TODO how to read param
 	params := httprouter.ParamsFromContext(r.Context())

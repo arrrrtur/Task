@@ -42,7 +42,7 @@ func (app *application) Register(router *httprouter.Router) {
 	router.HandlerFunc(http.MethodPatch, "/balance/reserve-from-balance", apperror.Middleware(app.ReserveFromBalance))
 	router.HandlerFunc(http.MethodPatch, "/balance/has-passed", apperror.Middleware(app.WriteOffMoney))
 	router.HandlerFunc(http.MethodGet, "/balance/get-balance", apperror.Middleware(app.GetBalance))
-	router.HandlerFunc(http.MethodPost, "/balance/cancel-order", apperror.Middleware(app.CancelOrder))
+	router.HandlerFunc(http.MethodPatch, "/balance/cancel-order", apperror.Middleware(app.CancelOrder))
 	router.HandlerFunc(http.MethodGet, "/balance/get-history", apperror.Middleware(app.GetTransactionHistory))
 
 	// work with report

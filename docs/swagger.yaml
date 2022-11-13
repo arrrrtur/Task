@@ -1,0 +1,206 @@
+basePath: /
+definitions:
+  models.UnmarshalGetReport:
+    properties:
+      year_month:
+        type: string
+    type: object
+  models.UnmarshallCancel:
+    properties:
+      amount:
+        type: string
+      balance_id:
+        type: string
+      order_id:
+        type: string
+    type: object
+  models.UnmarshallGetBalance:
+    properties:
+      balance_id:
+        type: string
+    type: object
+  models.UnmarshallGetTransactionHistory:
+    properties:
+      balance_id:
+        type: string
+      page:
+        type: string
+      per_page:
+        type: string
+      sort_by_amount_order:
+        type: string
+      sort_by_date_order:
+        type: string
+    type: object
+  models.UnmarshallServicePay:
+    properties:
+      amount:
+        type: string
+      balance_id:
+        type: string
+      order_id:
+        type: string
+      service_id:
+        type: string
+    type: object
+  models.UnmarshallTopUpBalance:
+    properties:
+      amount:
+        type: string
+      balance_id:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API Server for wallet application
+  title: Avito Tech Task
+  version: "1.0"
+paths:
+  /balance/cancel-order:
+    patch:
+      consumes:
+      - application/json
+      description: If order was canceled return money from reserved balance to user's
+        balance
+      parameters:
+      - description: cancel pay info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.UnmarshallCancel'
+      produces:
+      - application/json
+      responses: {}
+      summary: Cancel order
+      tags:
+      - balance
+  /balance/get-balance:
+    get:
+      consumes:
+      - application/json
+      description: Get balance or create if balance doesn't exist
+      parameters:
+      - description: id from balance
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.UnmarshallGetBalance'
+      produces:
+      - application/json
+      responses: {}
+      summary: Get user balance
+      tags:
+      - balance
+  /balance/get-history:
+    get:
+      consumes:
+      - application/json
+      description: get list of json with user's transactions(sorting by date and amount,
+        pagination).
+      parameters:
+      - description: history params
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.UnmarshallGetTransactionHistory'
+      produces:
+      - application/json
+      responses: {}
+      summary: Get user's transaction history
+      tags:
+      - balance
+  /balance/has-passed:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: pay info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.UnmarshallServicePay'
+      produces:
+      - application/json
+      responses: {}
+      summary: Confirm the payment
+      tags:
+      - balance
+  /balance/reserve-from-balance:
+    patch:
+      consumes:
+      - application/json
+      description: Reserve money from balance to reserved balance until transaction
+        is finished
+      parameters:
+      - description: pay info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.UnmarshallServicePay'
+      produces:
+      - application/json
+      responses: {}
+      summary: Reserve money to pay service
+      tags:
+      - balance
+  /balance/top-up-balance:
+    post:
+      consumes:
+      - application/json
+      description: Replenish the balance and create trainsaction
+      parameters:
+      - description: balance id and amount
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.UnmarshallTopUpBalance'
+      produces:
+      - application/json
+      responses: {}
+      summary: Replenish the balance
+      tags:
+      - balance
+  /file/{filename}:
+    get:
+      consumes:
+      - application/json
+      description: get report file with statistic
+      parameters:
+      - description: filename
+        in: path
+        name: filename
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get report file
+      tags:
+      - balance
+  /report/get-link-report:
+    get:
+      consumes:
+      - application/json
+      description: Create report file and get a link to a report in which statistics
+        on services for profit
+      parameters:
+      - description: date info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/models.UnmarshalGetReport'
+      produces:
+      - application/json
+      responses: {}
+      summary: Get report link
+      tags:
+      - balance
+swagger: "2.0"

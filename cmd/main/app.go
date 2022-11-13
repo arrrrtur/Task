@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ ""
 	"Task/internal/config"
 	"Task/internal/handlers"
 	"Task/internal/services"
@@ -17,6 +18,11 @@ import (
 	"time"
 )
 
+// @title Avito Tech Task
+// @version 1.0
+// @description API Server for wallet application
+// @host localhost:8080
+// @BasePath /
 func main() {
 	logger := logging.GetLogger()
 	logger.Info("create router")

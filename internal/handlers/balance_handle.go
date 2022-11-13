@@ -16,7 +16,13 @@ const (
 	DESC = "DESC"
 )
 
-// GetBalance Показать баланс
+// @Summary Get user balance
+// @Tags balance
+// @Description Get balance or create if balance doesn't exist
+// @Accept json
+// @Produce json
+// @Param input body models.UnmarshallGetBalance true "id from balance"
+// @Router /balance/get-balance [GET]
 func (app *application) GetBalance(w http.ResponseWriter, r *http.Request) error {
 	jsn, err := internal.ParsJSON(r)
 	if err != nil {
@@ -40,7 +46,13 @@ func (app *application) GetBalance(w http.ResponseWriter, r *http.Request) error
 	return nil
 }
 
-// TopUpBalance Пополнить баланс
+// @Summary Replenish the balance
+// @Tags balance
+// @Description Replenish the balance and create trainsaction
+// @Accept json
+// @Produce json
+// @Param input body models.UnmarshallTopUpBalance true "balance id and amount"
+// @Router /balance/top-up-balance [POST]
 func (app *application) TopUpBalance(w http.ResponseWriter, r *http.Request) error {
 
 	jsn, err := internal.ParsJSON(r)
@@ -109,7 +121,13 @@ func (app *application) TopUpBalance(w http.ResponseWriter, r *http.Request) err
 	return nil
 }
 
-// GetTransactionHistory Получить список транзакций (принимает id пользователя и параметры сортировки и пагинации)
+// @Summary Get user's transaction history
+// @Tags balance
+// @Description get list of json with user's transactions(sorting by date and amount, pagination).
+// @Accept json
+// @Produce json
+// @Param input body models.UnmarshallGetTransactionHistory true "history params"
+// @Router /balance/get-history [GET]
 func (app *application) GetTransactionHistory(w http.ResponseWriter, r *http.Request) error {
 	var params api.Params
 
